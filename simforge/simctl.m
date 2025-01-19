@@ -103,7 +103,7 @@ BOOL launchAppOnSimulatorWithDylibs(NSString *simulatorUUID, NSString *appBundle
     
     // When true, this will block until the Simulator process exits. When it exits, all output printed
     // by the process while it was running will get dumped to stdout. (It could be streamed with more effort)
-    BOOL withConsole = NO;
+    BOOL withConsole = YES;
 
     NSArray *command = @[@"simctl", @"launch", simulatorUUID, appBundleId];
     if (withConsole) {

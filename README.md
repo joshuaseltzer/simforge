@@ -77,3 +77,5 @@ simforge launch --bundleid com.example.app --dylib /path/to/tweak.dylib
 ```
 
 The dylib will be automatically converted for simulator compatibility and signed if needed.
+
+![simforge](./simforge-launch.gif)
