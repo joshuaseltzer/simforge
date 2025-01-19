@@ -46,24 +46,19 @@ Successfully converted: app-decrypt-com.zhiliaoapp.musically9bm7fcnv.app/TikTok
 
 ### 4. Code Sign the Modified App
 
-After conversion, the app needs to be re-signed. Replace `$SIGNING_ID` with your developer certificate identifier:
+After conversion, the app needs to be re-signed. You can simply ad-hoc sign:
 
 ```bash
 # Sign frameworks first
-codesign -f -s "$SIGNING_ID" /path/to/Payload/YourApp.app/Frameworks/*
+codesign -f -s - /path/to/Payload/YourApp.app/Frameworks/*
 
 # Then sign the main app bundle
-codesign -f -s "$SIGNING_ID" /path/to/Payload/YourApp.app
-```
-
-To find your signing identity:
-```bash
-security find-identity -v -p codesigning
+codesign -f -s - /path/to/Payload/YourApp.app
 ```
 
 ### 5. Install to Simulator
 
-Install the modified and resigned app to a booted simulator:
+You can drag-and-drop `YourApp.app` folder into your simulator home screen to install, or install from command line:
 
 ```bash
 # List available simulators
