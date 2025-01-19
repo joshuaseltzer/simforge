@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5F8BEDC62D3CD73400D52DC6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F8BEDC02D3CD73400D52DC6 /* main.m */; };
+		5F8BEDC72D3CD73400D52DC6 /* platform_changer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F8BEDC22D3CD73400D52DC6 /* platform_changer.m */; };
+		5F8BEDC82D3CD73400D52DC6 /* simctl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F8BEDC42D3CD73400D52DC6 /* simctl.m */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		5F8BED352D3997E500D52DC6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -20,15 +26,12 @@
 
 /* Begin PBXFileReference section */
 		5F8BED372D3997E500D52DC6 /* simforge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = simforge; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F8BEDC02D3CD73400D52DC6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5F8BEDC12D3CD73400D52DC6 /* platform_changer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = platform_changer.h; sourceTree = "<group>"; };
+		5F8BEDC22D3CD73400D52DC6 /* platform_changer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = platform_changer.m; sourceTree = "<group>"; };
+		5F8BEDC32D3CD73400D52DC6 /* simctl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simctl.h; sourceTree = "<group>"; };
+		5F8BEDC42D3CD73400D52DC6 /* simctl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simctl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		5F8BED392D3997E500D52DC6 /* simforge */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = simforge;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5F8BED342D3997E500D52DC6 /* Frameworks */ = {
@@ -44,7 +47,7 @@
 		5F8BED2E2D3997E500D52DC6 = {
 			isa = PBXGroup;
 			children = (
-				5F8BED392D3997E500D52DC6 /* simforge */,
+				5F8BEDC52D3CD73400D52DC6 /* simforge */,
 				5F8BED382D3997E500D52DC6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +58,18 @@
 				5F8BED372D3997E500D52DC6 /* simforge */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5F8BEDC52D3CD73400D52DC6 /* simforge */ = {
+			isa = PBXGroup;
+			children = (
+				5F8BEDC02D3CD73400D52DC6 /* main.m */,
+				5F8BEDC12D3CD73400D52DC6 /* platform_changer.h */,
+				5F8BEDC22D3CD73400D52DC6 /* platform_changer.m */,
+				5F8BEDC32D3CD73400D52DC6 /* simctl.h */,
+				5F8BEDC42D3CD73400D52DC6 /* simctl.m */,
+			);
+			path = simforge;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +86,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				5F8BED392D3997E500D52DC6 /* simforge */,
 			);
 			name = simforge;
 			packageProductDependencies = (
@@ -120,6 +132,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F8BEDC62D3CD73400D52DC6 /* main.m in Sources */,
+				5F8BEDC72D3CD73400D52DC6 /* platform_changer.m in Sources */,
+				5F8BEDC82D3CD73400D52DC6 /* simctl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +262,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 44L979X757;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -257,6 +273,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 44L979X757;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

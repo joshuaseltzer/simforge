@@ -22,18 +22,18 @@ This will create a `Payload` directory containing the `.app` bundle.
 
 ### 3. Convert for Simulator
 
-Run simforge on the extracted `.app` bundle:
+Run `simforge convert` on the extracted `.app` bundle:
 
 ```bash
-simforge /path/to/Payload/YourApp.app
+simforge convert /path/to/Payload/YourApp.app
 ```
 
 simforge will find all Mach-O binaries in the app bundle and modify their headers (in place) to indicate simulator compatibility
 
-##### Example simforge Output
+##### Example `simforge convert` Output
 
 ```bash
-simforge ./app-decrypt-com.zhiliaoapp.musically9bm7fcnv.app
+simforge convert ./app-decrypt-com.zhiliaoapp.musically9bm7fcnv.app
 Successfully converted: app-decrypt-com.zhiliaoapp.musically9bm7fcnv.app/PlugIns/AWEVideoWidget.appex/AWEVideoWidget
 Successfully converted: app-decrypt-com.zhiliaoapp.musically9bm7fcnv.app/PlugIns/AwemeShareExtension.appex/AwemeShareExtension
 Successfully converted: app-decrypt-com.zhiliaoapp.musically9bm7fcnv.app/PlugIns/AwemeBroadcastExtension.appex/AwemeBroadcastExtension
@@ -72,3 +72,13 @@ xcrun simctl list devices
 # Install the app (replace UUID with your simulator's identifier)
 xcrun simctl install "SIMULATOR_UUID" /path/to/Payload/YourApp.app
 ```
+
+### 6. Launch with Dylib Injection (Optional)
+
+You can also launch an installed app with dylib injection:
+
+```bash
+simforge launch --bundleid com.example.app --dylib /path/to/tweak.dylib
+```
+
+The dylib will be automatically converted for simulator compatibility and signed if needed.
