@@ -10,6 +10,7 @@
 		5F8BEDC62D3CD73400D52DC6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F8BEDC02D3CD73400D52DC6 /* main.m */; };
 		5F8BEDC72D3CD73400D52DC6 /* platform_changer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F8BEDC22D3CD73400D52DC6 /* platform_changer.m */; };
 		5F8BEDC82D3CD73400D52DC6 /* simctl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F8BEDC42D3CD73400D52DC6 /* simctl.m */; };
+		5FBAC06E2D50666D00AF19D8 /* tmpfs_overlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FBAC06D2D50666D00AF19D8 /* tmpfs_overlay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		5F8BEDC22D3CD73400D52DC6 /* platform_changer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = platform_changer.m; sourceTree = "<group>"; };
 		5F8BEDC32D3CD73400D52DC6 /* simctl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simctl.h; sourceTree = "<group>"; };
 		5F8BEDC42D3CD73400D52DC6 /* simctl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simctl.m; sourceTree = "<group>"; };
+		5FBAC06C2D50666D00AF19D8 /* tmpfs_overlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tmpfs_overlay.h; sourceTree = "<group>"; };
+		5FBAC06D2D50666D00AF19D8 /* tmpfs_overlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tmpfs_overlay.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				5F8BEDC22D3CD73400D52DC6 /* platform_changer.m */,
 				5F8BEDC32D3CD73400D52DC6 /* simctl.h */,
 				5F8BEDC42D3CD73400D52DC6 /* simctl.m */,
+				5FBAC06C2D50666D00AF19D8 /* tmpfs_overlay.h */,
+				5FBAC06D2D50666D00AF19D8 /* tmpfs_overlay.m */,
 			);
 			path = simforge;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F8BEDC62D3CD73400D52DC6 /* main.m in Sources */,
+				5FBAC06E2D50666D00AF19D8 /* tmpfs_overlay.m in Sources */,
 				5F8BEDC72D3CD73400D52DC6 /* platform_changer.m in Sources */,
 				5F8BEDC82D3CD73400D52DC6 /* simctl.m in Sources */,
 			);
@@ -260,9 +266,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 44L979X757;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -271,9 +278,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 44L979X757;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
