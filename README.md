@@ -4,13 +4,40 @@ simforge is a tool that enables running ARM64 iOS apps on Apple Silicon iOS simu
 
 ![simforge](./simforge.gif)
 
-## Usage
+### Usage
 
-### 1. Prepare the Decrypted App
+```
+Usage: simforge <command> [options]
+
+Commands:
+  convert     Add Simulator support to iOS arm64 mach-o binaries
+  launch      Launch app in Simulator with dylib injection
+  makerw      Create a read-write overlay of a directory
+
+Convert:
+  simforge convert <path>    Convert iOS app/dylib for simulator (breaks codesig)
+
+Launch:
+  simforge launch --bundleid <id> --dylib <path>
+
+Make Read-Write:
+  simforge makerw <path>     Create RW overlay of directory while retaining contents
+
+Examples:
+  simforge convert /path/to/MyApp.app
+  simforge convert /path/to/tweak.dylib
+  simforge launch --bundleid com.example.app --dylib /path/to/tweak.dylib
+  simforge makerw "iOS 18.1.simruntime/.../RuntimeRoot/System/Library/CoreServices/SpringBoard.app"
+```
+
+### Running an iOS App in Simulator
+
+
+#### 1. Prepare the Decrypted App
 
 Start with a decrypted build of the iOS app you want to run in the simulator.
 
-### 2. Extract the IPA
+#### 2. Extract the IPA
 
 Extract the `.app` bundle from the IPA:
 
@@ -20,7 +47,7 @@ unzip /path/to/your-app-decrypted.ipa -d /path/to/destination/
 
 This will create a `Payload` directory containing the `.app` bundle.
 
-### 3. Convert for Simulator
+#### 3. Convert for Simulator
 
 Run `simforge convert` on the extracted `.app` bundle:
 
@@ -44,7 +71,7 @@ Successfully converted: app-decrypt-com.zhiliaoapp.musically9bm7fcnv.app/PlugIns
 Successfully converted: app-decrypt-com.zhiliaoapp.musically9bm7fcnv.app/TikTok
 ```
 
-### 4. Code Sign the Modified App
+#### 4. Code Sign the Modified App
 
 After conversion, the app needs to be re-signed. You can simply ad-hoc sign:
 
@@ -56,7 +83,7 @@ codesign -f -s - /path/to/Payload/YourApp.app/Frameworks/*
 codesign -f -s - /path/to/Payload/YourApp.app
 ```
 
-### 5. Install to Simulator
+#### 5. Install to Simulator
 
 You can drag-and-drop `YourApp.app` folder into your simulator home screen to install, or install from command line:
 
@@ -68,7 +95,7 @@ xcrun simctl list devices
 xcrun simctl install "SIMULATOR_UUID" /path/to/Payload/YourApp.app
 ```
 
-### 6. Launch with Dylib Injection (Optional)
+#### 6. Launch with Dylib Injection (Optional)
 
 You can also launch an installed app with dylib injection:
 

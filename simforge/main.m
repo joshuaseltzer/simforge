@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "platform_changer.h"
+#import "tmpfs_overlay.h"
 #import "simctl.h"
 
 void printUsage(void) {
@@ -14,8 +15,9 @@ void printUsage(void) {
            "Usage: simforge <command> [options]\n"
            "\n"
            "Commands:\n"
-           "  convert   Add Simulator support to iOS arm64 mach-o binaries\n"
-           "  launch    Launch app in Simulator with dylib injection\n"
+           "  convert     Add Simulator support to iOS arm64 mach-o binaries\n"
+           "  launch      Launch app in Simulator with dylib injection\n"
+           "  makerw      Create a read-write overlay of a directory\n"
            "\n"
            "Convert:\n"
            "  simforge convert <path>    Convert iOS app/dylib for simulator (breaks codesig)\n"
@@ -23,10 +25,14 @@ void printUsage(void) {
            "Launch:\n"
            "  simforge launch --bundleid <id> --dylib <path>\n"
            "\n"
+           "Make Read-Write:\n"
+           "  simforge makerw <path>     Create RW overlay of directory while retaining contents\n"
+           "\n"
            "Examples:\n"
            "  simforge convert /path/to/MyApp.app\n"
            "  simforge convert /path/to/tweak.dylib\n"
            "  simforge launch --bundleid com.example.app --dylib /path/to/tweak.dylib\n"
+           "  simforge makerw /path/in/simruntime\n"
            );
 }
 
@@ -38,32 +44,53 @@ int main(int argc, const char * argv[]) {
             return 1;
         }
         
-        if (strcmp(argv[1], "launch") == 0) {
+        NSString *command = [NSString stringWithUTF8String:argv[1]];
+        if ([command isEqualToString:@"launch"]) {
             NSString *launchBundleId = nil;
             NSString *launchDylibPath = nil;
-            for (int i = 2; i < argc; i++) {
-                if (strcmp(argv[i], "--bundleid") == 0) {
-                    launchBundleId = [NSString stringWithFormat:@"%s", argv[i + 1]];
+            
+            for (int i = 2; i < argc - 1; i++) {
+                NSString *arg = [NSString stringWithUTF8String:argv[i]];
+                
+                if ([arg isEqualToString:@"--bundleid"]) {
+                    launchBundleId = [NSString stringWithUTF8String:argv[i + 1]];
                 }
-                else if (strcmp(argv[i], "--dylib") == 0) {
-                    launchDylibPath = [NSString stringWithFormat:@"%s", argv[i + 1]];
+                else if ([arg isEqualToString:@"--dylib"]) {
+                    launchDylibPath = [NSString stringWithUTF8String:argv[i + 1]];
                 }
             }
             
             if (!launchBundleId || !launchDylibPath) {
-                NSLog(@"Missing --bundleid or --dylib");
+                NSLog(@"Error: Missing --bundleid or --dylib");
+                printUsage();
                 return 1;
             }
             
             BOOL success = launchAppOnAnyBootedSimulatorWithDylibs(launchBundleId, @[launchDylibPath]);
             return success ? 0 : 1;
         }
-        else if (strcmp(argv[1], "convert") == 0) {
-            // If not launching, do a conversion
+        else if ([command isEqualToString:@"convert"]) {
+            if (argc < 3) {
+                NSLog(@"Error: Missing path argument for convert command");
+                printUsage();
+                return 1;
+            }
+            
             NSLog(@"Converting: %s", argv[2]);
             convertPlatformToSimulator(argv[2]);
         }
+        else if ([command isEqualToString:@"makerw"]) {
+            if (argc < 3) {
+                NSLog(@"Error: Missing path argument for makerw command");
+                printUsage();
+                return 1;
+            }
+            
+            NSString *path = [NSString stringWithUTF8String:argv[2]];
+            makeDirInSimRuntimeReadWrite(path);
+        }
         else {
+            NSLog(@"Error: Unknown command '%@'", command);
             printUsage();
             return 1;
         }
